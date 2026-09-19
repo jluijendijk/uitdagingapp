@@ -22,7 +22,7 @@ const praise=['Yes! Goed gevonden!','Super!','Dat heb jij slim opgelost!','Yes, 
 export default function App(){
  const [p,setP]=useState<Progress>(()=>{try{const x={...blank(),...(JSON.parse(localStorage.getItem('uitdagingapp')||'null')||{})};x.weeklyDone=x.weeklyDone||[];x.attempts=x.attempts||{};x.correct=x.correct||{};if(x.week!==weekKey()){x.week=weekKey();x.stars=0;x.weeklyDone=[];x.counts={}}return x}catch{return blank()}});
  const [page,setPage]=useState<'home'|'worlds'|'stars'|'collection'|'parent'>('home'); const [world,setWorld]=useState<Category|null>(null); const [active,setActive]=useState<Challenge|null>(null);
- const [feedback,setFeedback]=useState(''); const [tries,setTries]=useState(0); const [typed,setTyped]=useState(''); const [intro,setIntro]=useState(p.intro?4:0); const hold=useRef<number|undefined>();
+ const [feedback,setFeedback]=useState(''); const [tries,setTries]=useState(0); const [typed,setTyped]=useState(''); const [intro,setIntro]=useState(p.intro?4:0); const hold=useRef<number|undefined>(undefined);
  useEffect(()=>localStorage.setItem('uitdagingapp',JSON.stringify(p)),[p]);
  useEffect(()=>{if('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(()=>{})},[]);
  const complete=(item:Challenge)=>{
